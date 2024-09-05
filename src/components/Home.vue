@@ -6,11 +6,11 @@
       <label for="risk-level-filter">Filter by Risk Level: </label>
       <select id="risk-level-filter" v-model="selectedRiskLevel">
         <option value="">All</option>
-        <option value="Low">Low</option>
-        <option value="Medium">Medium</option>
-        <option value="High">High</option>
+        <option value="1">Low</option>
+        <option value="2">Medium</option>
+        <option value="3">High</option>
       </select>
-  
+ 
      
       <div v-if="store.loading">Loading...</div>
       <div v-if="store.error">Error: {{ store.error.message }}</div>
@@ -50,7 +50,7 @@
   
   <script setup>
   import { ref, computed, onMounted } from 'vue';
-  import { useMyStore } from '@/stores/myStore'; 
+  import { useMyStore } from '@/stores/funds'; 
   
   const store = useMyStore();
   const selectedRiskLevel = ref(''); 
@@ -68,12 +68,12 @@
     }
   
   
-    return store.funds.filter(fund => fund.risk === selectedRiskLevel.value);
+    return store.funds.filter(fund => fund.risk == selectedRiskLevel.value);
   });
   </script>
   
   <style scoped>
-  /* Basic table and layout styling */
+ 
   table {
     width: 100%;
     border-collapse: collapse;

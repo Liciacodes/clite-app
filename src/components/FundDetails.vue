@@ -46,7 +46,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import { useMyStore } from '@/stores/myStore'; // Ensure correct path to your store
+import { useMyStore } from '@/stores/funds'; // Ensure correct path to your store
 
 const route = useRoute();
 const store = useMyStore();
@@ -56,7 +56,7 @@ const error = ref(null);
 
 onMounted(async () => {
   try {
-    await store.fetchData(); // Ensure data is fetched before accessing
+    await store.fetchData(); 
     const fundId = route.params.id;
     fund.value = store.funds.find(f => f.id === fundId);
     if (!fund.value) {
@@ -71,7 +71,7 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-/* Add your styles here */
+
 h1 {
   font-size: 2em;
 }
