@@ -1,9 +1,21 @@
 <template>
     <div>
       <h1>Investment Funds</h1>
+  
+    
+      <label for="risk-level-filter">Filter by Risk Level: </label>
+      <select id="risk-level-filter" v-model="selectedRiskLevel">
+        <option value="">All</option>
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+      </select>
+  
+     
       <div v-if="store.loading">Loading...</div>
       <div v-if="store.error">Error: {{ store.error.message }}</div>
   
+     
       <table v-if="!store.loading && !store.error">
         <thead>
           <tr>
@@ -15,7 +27,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="fund in store.funds" :key="fund.id">
+         
+          <tr v-for="fund in filteredFunds" :key="fund.id">
             <td>
               <router-link :to="{ name: 'InvestmentDetails', params: { id: fund.id } }">
                 {{ fund.name }}
@@ -36,29 +49,41 @@
   </template>
   
   <script setup>
-  import { onMounted } from 'vue';
+  import { ref, computed, onMounted } from 'vue';
+  import { useMyStore } from '@/stores/myStore'; 
   
-  import { useMyStore } from '@/stores/myStore';
-
- 
   const store = useMyStore();
+  const selectedRiskLevel = ref(''); 
   
-  
+ 
   onMounted(() => {
-      store.fetchData(); 
+    store.fetchData(); 
+  });
+  
+
+  const filteredFunds = computed(() => {
+    if (!selectedRiskLevel.value) {
+      
+      return store.funds;
+    }
+  
+  
+    return store.funds.filter(fund => fund.risk === selectedRiskLevel.value);
   });
   </script>
   
   <style scoped>
+  /* Basic table and layout styling */
   table {
-      width: 100%;
-      border-collapse: collapse;
+    width: 100%;
+    border-collapse: collapse;
   }
   th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
+    border: 1px solid #ddd;
+    padding: 8px;
   }
   th {
-      background-color: #f2f2f2;
+    background-color: #f2f2f2;
   }
   </style>
+  
