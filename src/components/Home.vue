@@ -93,7 +93,7 @@ label {
 }
 
 .table-container {
-  overflow-x: auto; /* Allows horizontal scrolling */
+  overflow-x: auto; 
 }
 
 table {
@@ -136,12 +136,12 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Scrollable table container for small screens */
+
 .table-container {
   overflow-x: auto;
 }
 
-/* Responsive styles */
+
 @media (max-width: 768px) {
   th, td {
     font-size: 0.9rem;
@@ -150,7 +150,7 @@ a:hover {
 
   table {
     width: 100%;
-    min-width: 600px; /* Ensure a reasonable minimum width */
+    min-width: 600px; 
   }
   
   #risk-level-filter {
@@ -164,9 +164,9 @@ a:hover {
   }
 
   td {
-    white-space: nowrap; /* Prevent text from squeezing */
+    white-space: nowrap; 
     overflow: hidden;
-    text-overflow: ellipsis; /* Display ellipsis (...) when text is too long */
+    text-overflow: ellipsis; 
   }
 }
 
@@ -178,19 +178,20 @@ a:hover {
 
   table {
     width: 100%;
-    min-width: 500px; /* Ensure a reasonable minimum width */
+    min-width: 500px; 
   }
 
   #risk-level-filter {
     font-size: 1.1rem;
     padding: 0.75rem 1rem;
     width: 100%;
+    
   }
 
-  /* Hide unnecessary columns for mobile */
+
   th:nth-child(3), td:nth-child(3), 
   th:nth-child(4), td:nth-child(4) {
-    display: none; /* Hide columns Asset Type and Fund Manager */
+    display: none;
   }
 }
 
