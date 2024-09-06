@@ -1,22 +1,20 @@
 <template>
-    <div class="app-container" >
-      <h1>Investment Funds</h1>
-  
-    
-      <label for="risk-level-filter">Filter by Risk Level: </label>
-      <select id="risk-level-filter" v-model="selectedRiskLevel">
-        <option value="">All</option>
-        <option value="1">Low</option>
-        <option value="2">Medium</option>
-        <option value="3">High</option>
-      </select>
- 
-     
-      <div v-if="store.loading">Loading...</div>
-      <div v-if="store.error">Error: {{ store.error.message }}</div>
-  
-     
-      <table v-if="!store.loading && !store.error" >
+  <div class="app-container">
+    <h1>Investment Funds</h1>
+
+    <label for="risk-level-filter">Filter by Risk Level: </label>
+    <select id="risk-level-filter" v-model="selectedRiskLevel">
+      <option value="">All</option>
+      <option value="1">Low</option>
+      <option value="2">Medium</option>
+      <option value="3">High</option>
+    </select>
+
+    <div v-if="store.loading">Loading...</div>
+    <div v-if="store.error">Error: {{ store.error.message }}</div>
+
+    <div class="table-container">
+      <table v-if="!store.loading && !store.error">
         <thead>
           <tr>
             <th>Name</th>
@@ -27,7 +25,6 @@
           </tr>
         </thead>
         <tbody>
-         
           <tr v-for="fund in filteredFunds" :key="fund.id">
             <td>
               <router-link :to="{ name: 'InvestmentDetails', params: { id: fund.id } }">
@@ -46,45 +43,37 @@
         </tbody>
       </table>
     </div>
-  </template>
-  
-  <script setup>
-  import { ref, computed, onMounted } from 'vue';
-  import { useMyStore } from '@/stores/funds'; 
-  
-  const store = useMyStore();
-  const selectedRiskLevel = ref(''); 
-  
- 
-  onMounted(() => {
-    store.fetchData(); 
-  });
-  
+  </div>
+</template>
 
-  const filteredFunds = computed(() => {
-    if (!selectedRiskLevel.value) {
-      
-      return store.funds;
-    }
   
-  
-    return store.funds.filter(fund => fund.risk == selectedRiskLevel.value);
-  });
+<script setup>
+import { ref, computed, onMounted } from 'vue';
+import { useMyStore } from '@/stores/funds';
 
-  const formattedReturns = (returns) => {
-    return (returns * 100).toFixed(2) + '%'
+const store = useMyStore();
+const selectedRiskLevel = ref('');
+
+onMounted(() => {
+  store.fetchData();
+});
+
+const filteredFunds = computed(() => {
+  if (!selectedRiskLevel.value) {
+    return store.funds;
   }
-  </script>
-  
-  
- 
+  return store.funds.filter(fund => fund.risk == selectedRiskLevel.value);
+});
 
+const formattedReturns = (returns) => {
+  return (returns * 100).toFixed(2) + '%';
+};
+</script>
 
 
   <style scoped>
-
-.app-container {
-  background-color: #F9FBFD; 
+  .app-container {
+  background-color: #F9FBFD;
   min-height: 100vh;
   padding: 2rem;
 }
@@ -98,6 +87,14 @@ h1 {
   font-family: 'Poppins', sans-serif;
 }
 
+label {
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+}
+
+.table-container {
+  overflow-x: auto; /* Allows horizontal scrolling */
+}
 
 table {
   width: 100%;
@@ -126,20 +123,8 @@ td {
 }
 
 tr:hover td {
-  background-color: #F7FAFF; 
+  background-color: #F7FAFF;
 }
-
-
-#risk-level-filter {
-  padding: 0.5rem 1rem;
-  border: 1px solid #E6E9EF;
-  border-radius: 0.25rem;
-  font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  margin-bottom: 1.5rem;
-  width: 200px;
-}
-
 
 a {
   color: #0067F5;
@@ -151,24 +136,67 @@ a:hover {
   text-decoration: underline;
 }
 
-
-.px-8 {
-  padding: 2rem 3rem;
+/* Scrollable table container for small screens */
+.table-container {
+  overflow-x: auto;
 }
 
+/* Responsive styles */
+@media (max-width: 768px) {
+  th, td {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
 
-button {
-  background-color: #0067F5;
-  color: white;
-  padding: 0.5rem 1.5rem;
-  border: none;
-  border-radius: 0.25rem;
-  font-size: 1rem;
-  cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  table {
+    width: 100%;
+    min-width: 600px; /* Ensure a reasonable minimum width */
+  }
+  
+  #risk-level-filter {
+    font-size: 1.2rem;
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    background-color: white;
+    color: #333;
+    border: 1px solid #E6E9EF;
+    border-radius: 0.25rem;
+  }
+
+  td {
+    white-space: nowrap; /* Prevent text from squeezing */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Display ellipsis (...) when text is too long */
+  }
 }
 
-button:hover {
-  background-color: #0056D2;
+@media (max-width: 480px) {
+  th, td {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+
+  table {
+    width: 100%;
+    min-width: 500px; /* Ensure a reasonable minimum width */
+  }
+
+  #risk-level-filter {
+    font-size: 1.1rem;
+    padding: 0.75rem 1rem;
+    width: 100%;
+  }
+
+  /* Hide unnecessary columns for mobile */
+  th:nth-child(3), td:nth-child(3), 
+  th:nth-child(4), td:nth-child(4) {
+    display: none; /* Hide columns Asset Type and Fund Manager */
+  }
 }
+
 </style>
+  
+ 
+
+
+
