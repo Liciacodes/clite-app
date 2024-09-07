@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 v-if="fund">Investment Details: {{ fund.name }}</h1>
-    <div v-if="loading">Loading fund details...</div>
+    <div v-if="loading"><Spinner/></div>
     <div v-if="error">{{ error }}</div>
     
     <div v-if="!loading && fund">
@@ -59,10 +59,11 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
-import { useMyStore } from '@/stores/funds'; 
+import { useFunds} from '@/stores/funds'; 
+import Spinner from './Spinner.vue';
 
 const route = useRoute();
-const store = useMyStore();
+const store = useFunds();
 const fund = ref(null);
 const loading = ref(true);
 const error = ref(null);

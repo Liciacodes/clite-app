@@ -2,7 +2,7 @@
   <div class="app-container">
     <h1>Investment Funds</h1>
 
-    <label for="risk-level-filter">Filter by Risk Level: </label>
+    <label for="risk-level-label">Filter by Risk Level: </label>
     <select id="risk-level-filter" v-model="selectedRiskLevel">
       <option value="">All</option>
       <option value="1">Low</option>
@@ -10,7 +10,7 @@
       <option value="3">High</option>
     </select>
 
-    <div v-if="store.loading">Loading...</div>
+    <div v-if="store.loading"><Spinner/></div>
     <div v-if="store.error">Error: {{ store.error.message }}</div>
 
     <div class="table-container">
@@ -49,9 +49,10 @@
   
 <script setup>
 import { ref, computed, onMounted } from 'vue';
-import { useMyStore } from '@/stores/funds';
+import { useFunds } from '@/stores/funds';
+import Spinner from './Spinner.vue';
 
-const store = useMyStore();
+const store = useFunds();
 const selectedRiskLevel = ref('');
 
 onMounted(() => {
@@ -73,7 +74,7 @@ const formattedReturns = (returns) => {
 
   <style scoped>
   .app-container {
-  background-color: #F9FBFD;
+  background-color: #eef1f4;
   min-height: 100vh;
   padding: 2rem;
 }
@@ -88,12 +89,27 @@ h1 {
 }
 
 label {
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-family: 'Inter', sans-serif;
+ color: #0A2E65;
 }
 
 .table-container {
   overflow-x: auto; 
+}
+
+#risk-level-filter {
+  font-size: 1.2rem;
+  margin-left: 10px;
+  padding: 0.1rem 1.5rem;
+  background-color: white;
+  color: #0A2E65;
+  border: 1px solid #E6E9EF;
+  border-radius: 0.25rem;
+}
+
+#risk-level-label {
+  color: #0A2E65;
 }
 
 table {
@@ -102,6 +118,7 @@ table {
   margin-top: 2rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   font-family: 'Inter', sans-serif;
+  
 }
 
 th, td {
@@ -113,13 +130,13 @@ th, td {
 
 th {
   background-color: #F1F5FA;
-  color: #4D5566;
+  color: #0A2E65;
   font-weight: 600;
 }
 
 td {
   background-color: #FFF;
-  color: #333;
+  color: #0A2E65;
 }
 
 tr:hover td {
@@ -163,6 +180,10 @@ a:hover {
     border-radius: 0.25rem;
   }
 
+  #risk-level-label {
+    color: #0A2E65;
+  }
+
   td {
     white-space: nowrap; 
     overflow: hidden;
@@ -181,6 +202,7 @@ a:hover {
     min-width: 500px; 
   }
 
+ 
   #risk-level-filter {
     font-size: 1.1rem;
     padding: 0.75rem 1rem;
