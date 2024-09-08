@@ -1,29 +1,84 @@
-# clite-app
+# Clite App
 
-This template should help get you started developing with Vue 3 in Vite.
+This is a simple Vue.js application that displays a list of investment funds. The app includes features for viewing fund details, filtering by risk level, and navigating to individual fund details.
 
-## Recommended IDE Setup
+Features
+1. Display Funds: Shows a list of available investment funds with details like name, returns, asset type, fund manager, and risk level.
+2. Filter Funds: Users can filter the funds based on their risk level (Low, Medium, High).
+3. Fund Details: Each fund name is clickable, leading to a detailed view of that fund.
+4. Responsive Design: The app is mobile-friendly and adjusts based on the device screen size
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+Table of Contents
+Installation
+Usage
+Project Structure
+Features
+Contributing
+License
+Installation
+Clone the repository:
 
-## Customize configuration
+bash
+Copy code
+git clone https://github.com/yourusername/investment-funds-app.git
+Navigate to the project directory:
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+bash
+Copy code
+cd investment-funds-app
+Install dependencies:
 
-## Project Setup
-
-```sh
+bash
+Copy code
 npm install
-```
+Run the development server:
 
-### Compile and Hot-Reload for Development
-
-```sh
+bash
+Copy code
 npm run dev
-```
+Open your browser at http://localhost:3000 to view the app.
 
-### Compile and Minify for Production
+Usage
+Once you have the application running, the home page will display a list of investment funds. You can filter the list by risk level using the dropdown menu. Clicking on any fund name will navigate you to a detailed view of that fund.
 
-```sh
-npm run build
-```
+Project Structure
+bash
+Copy code
+├── src
+│   ├── assets               # Images, fonts, and other static assets
+│   ├── components
+│   │   ├── Spinner.vue      # A loading spinner component
+│   ├── views
+│   │   ├── InvestmentDetails.vue # Detailed view for individual funds
+│   │   └── InvestmentList.vue    # Main list view of investment funds
+│   ├── stores               # Pinia store for state management
+│   ├── App.vue              # Root Vue component
+│   └── main.js              # Application entry point
+├── public                   # Static public assets
+├── package.json             # Project dependencies and scripts
+└── README.md                # This README file
+Key Components
+Spinner.vue: A spinner component to indicate loading state.
+InvestmentList.vue: The main component that lists all the funds and includes the filtering functionality.
+InvestmentDetails.vue: A detailed view for each individual investment fund.
+Styling
+The app uses scoped CSS with custom styles for the select dropdown, tables, and general layout. It also includes responsive design tweaks for smaller screens.
+
+Custom CSS for <select> Dropdown:
+css
+Copy code
+select {
+  width: 200px;
+  padding: 10px;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  color: #0A2E65;
+  background-color: #fff;
+  border: 2px solid #3C5F95;
+  border-radius: 8px;
+  appearance: none;
+  background-image: url('data:image/svg+xml;base64,...');
+  background-repeat: no-repeat;
+  background-position: right 10px top 50%;
+  background-size: 12px;
+}
