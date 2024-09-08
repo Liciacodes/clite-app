@@ -9,12 +9,12 @@ Features
 4. Responsive Design: The app is mobile-friendly and adjusts based on the device screen size
 
 Table of Contents
-Installation
-Usage
-Project Structure
-Features
-Installation
-Clone the repository:
+- Installation
+- Usage
+- Project Structure
+- Features
+- Installation
+- Clone the repository
 
 ```html
 git clone https://github.com/yourusername/investment-funds-app.git
@@ -78,6 +78,7 @@ Styling
 The app uses scoped CSS with custom styles for the select dropdown, tables, and general layout. It also includes responsive design tweaks for smaller screens.
 
 Custom CSS for <select> Dropdown:
+
 
 ```css
 select {
