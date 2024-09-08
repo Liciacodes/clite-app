@@ -1,14 +1,16 @@
 <template>
   <div class="app-container">
     <h1>Investment Funds</h1>
-
-    <label for="risk-level-label">Filter by Risk Level: </label>
+<div class="select-container">
+  <label for="risk-level-label">Filter by Risk Level: </label>
     <select id="risk-level-filter" v-model="selectedRiskLevel">
       <option value="">All</option>
       <option value="1">Low</option>
       <option value="2">Medium</option>
       <option value="3">High</option>
     </select>
+</div>
+  
 
     <div v-if="store.loading"><Spinner/></div>
     <div v-if="store.error">Error: {{ store.error.message }}</div>
@@ -82,10 +84,15 @@ const formattedReturns = (returns) => {
 h1 {
   font-size: 2rem;
   font-weight: 700;
-  color: #0067F5;
-  text-align: center;
+  color: #0A2E65;
   margin-bottom: 1.5rem;
   font-family: 'Poppins', sans-serif;
+}
+
+.select-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 label {
@@ -96,6 +103,8 @@ label {
 
 .table-container {
   overflow-x: auto; 
+ 
+  
 }
 
 #risk-level-filter {
@@ -118,6 +127,7 @@ table {
   margin-top: 2rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   font-family: 'Inter', sans-serif;
+  border-radius: 30px;
   
 }
 
@@ -204,8 +214,8 @@ a:hover {
 
  
   #risk-level-filter {
-    font-size: 1.1rem;
-    padding: 0.75rem 1rem;
+    font-size: 1.rem;
+    padding: 0.75rem 0.80rem;
     width: 100%;
     
   }
@@ -220,6 +230,5 @@ a:hover {
 </style>
   
  
-
 
 

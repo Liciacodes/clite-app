@@ -1,10 +1,12 @@
 <template>
   <div>
-    <h1 v-if="fund">Investment Details: {{ fund.name }}</h1>
+    <h1 v-if="fund">{{ fund.name }}</h1>
+
+    <router-link to="/" class="back-button">Back to Home</router-link>
     <div v-if="loading"><Spinner/></div>
     <div v-if="error">{{ error }}</div>
     
-    <div v-if="!loading && fund">
+    <div v-if="!loading && fund" class="details-container">
       <img :src="fund.logo" alt="Fund Logo" />
       <p><strong>Fund Code:</strong> {{ fund.fund_code }}</p>
       <p><strong>Returns:</strong> {{ computedReturns }}%</p>
@@ -112,38 +114,53 @@ const hasPerformanceData = computed(() => {
 h1 {
   font-size: 2rem;
   font-weight: 700;
-  color: #0067F5;
+   color: #0A2E65;
   margin-bottom: 1.5rem;
   font-family: 'Poppins', sans-serif;
-  text-align: center;
+  
+}
+
+.back-button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-bottom: 20px; 
+  background-color: #0067F5; 
+  color: white; 
+  text-decoration: none; 
+  border-radius: 20px; 
+  font-size: 1rem; 
 }
 
 h2 {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #333;
+  color: #0A2E65;
   margin-top: 2rem;
   font-family: 'Inter', sans-serif;
 }
 
+.details-container {
+  background-color: white
+}
+
 p {
   font-size: 1rem;
-  color: #555;
+  color: #0A2E65;
   margin-bottom: 1rem;
   font-family: 'Inter', sans-serif;
 }
 
 strong {
-  color: #333;
+  color: #0A2E65;
 }
 
 
 img {
-  max-width: 200px;
+  max-width: 150px;
   margin-bottom: 20px;
   display: block;
   border-radius: 0.5rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
 }
 
 
@@ -170,7 +187,7 @@ th {
 
 td {
   background-color: #FFF;
-  color: #333;
+  color: #0A2E65;
 }
 
 tr:hover td {
@@ -189,13 +206,9 @@ a:hover {
 }
 
 
-ul {
-  padding-left: 20px;
-}
-
 li {
   font-size: 1rem;
-  color: #555;
+  color: #0A2E65;
   font-family: 'Inter', sans-serif;
   margin-bottom: 0.5rem;
 }
@@ -204,7 +217,7 @@ li {
 div[ v-if="loading" ] {
   text-align: center;
   font-size: 1.2rem;
-  color: #333;
+  color: #0A2E65;
 }
 
 div[ v-if="error" ] {
